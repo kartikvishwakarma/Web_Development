@@ -1,0 +1,49 @@
+<% include ./partials/header%>
+
+
+<!-- <div class="row">
+	<h1 style="text-align: center">Login</h1>
+	<div style="width: 30%; margin: 25px auto;">
+		<form action="/login" method="POST">
+			<div class="form-group">
+				<input class="form-control" type="text" name="username" placeholder="username" required="">	
+			</div>
+			
+			<div class="form-group">
+				<input class="form-control" type="password" name="password" placeholder="password" required="">	
+			</div>
+			
+			<div class="form-group">
+				<button class="btn btn btn-primary block">Login</button>
+				<a href="/forgot" class="btn btn btn-info block"> Forgot Password</a>
+			</div>
+			
+		</form>
+
+ -->
+
+    <div class="row">
+        <h1 style="text-align: center">Login</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/login" method="post">
+            	
+            	<label for="username">Username</label>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="username" placeholder="John wick">
+                </div>
+
+                <label for="password">Password</label>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="password">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-primary ">Login</button>
+                    <a href="/forgot" class="btn btn btn-info block"> Forgot Password</a>
+                </div>
+            </form>
+            <a href="/campgrounds">Go Back</a>
+        </div>
+    </div>
+
+
+<% include ./partials/footer%>

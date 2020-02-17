@@ -1,0 +1,106 @@
+<%include ../partials/header.ejs %>
+
+<div class="container">
+	<div class="row">
+		
+		<div class="col-md-3">
+		  <p class="lead">YelpCamp</p>
+		  <div class="list-group">
+		    <li class="list-group-item active">Info 1</li>
+		    <li class="list-group-item">Info 2</li>
+		    <li class="list-group-item">Info 3</li>
+		  </div>
+
+		  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	    <link rel="stylesheet" href="https://cdn.maptiler.com/ol/v6.0.0/ol.css" type="text/css">
+	    <script src="https://cdn.maptiler.com/ol/v6.0.0/ol.js"></script>
+	    
+
+		  <div id="map"></div><p><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></p>
+		</div>
+
+		<div class="col-md-9">
+			<div class="thumbnail">
+				<img class="img-responsive" src="<%=campground.image%>">
+				<div class="caption-full">
+					<h4 class="pull-right">$<%=campground.price %>/night</h4>
+					<h4><a href=""><%=campground.name%></a></h4>
+					<p><%=campground.description%></p>
+					<p>
+					  <em>Submitted by: <a href="/users/<%= campground.author.id %>"> <%= campground.author.username %></a>, <%= moment(campground.createdAt).fromNow() %></em>
+					</p>
+					<!-- currentUser, since app.js line 47 use, req.user,  all page have info about current user, if any otherwise undefine -->
+					<% if(currentUser && campground.author.id.equals(currentUser._id) || (currentUser && currentUser.isAdmin)){ %>
+						<a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
+			
+					<!-- to delete use form, since we need to pass method DELETE, while href in <a>, goes to GET -->
+					<form class="delete-form" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+						<button class="btn btn-danger ">Delete</button>
+					</form>
+					<% } %>
+				</div>
+			</div>
+			
+			<div class="well">
+				<div class="text-right">
+					<a  class="btn btn-success" href="/campgrounds/<%=campground._id%>/comments/new"> Add New Comment</a>
+				</div>
+				<hr>
+				<% campground.comments.forEach(function(comment){ %>
+					<div class="row">
+						<div class="col-md-12">
+							<strong><%=comment.author.username%></strong>
+							<span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+							<p>
+						 		<%=comment.text%>
+							</p>
+							<% if(currentUser && comment.author.id.equals(currentUser._id) || (currentUser && currentUser.isAdmin)){ %>
+								<a class="btn btn-xs btn-warning" 
+								   href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">Edit</a>
+							   <form class="delete-form" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+							   	<input type="submit" class="btn btn-xs btn-danger " value="delete" >
+							   </form>
+						   <% } %>
+							
+						</div>
+					</div>
+					
+				<%})%>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<h1></h1>
+
+
+
+<p>
+	
+</p>
+
+<script>
+      var source = new ol.source.TileJSON({
+        url: 'https://api.maptiler.com/maps/basic/tiles.json?key=hfV5vvXyhORiwgfrThLA',
+        tileSize: 100,
+        crossOrigin: 'anonymous'
+      });
+      var lat = <%= campground.lat %>;
+      var lng = <%= campground.lng %>
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: source
+          })
+        ],
+        target: 'map',
+        view: new ol.View({
+          constrainResolution: true,
+          center: ol.proj.fromLonLat([lng, lat]),
+          zoom: 2
+        })
+      });
+    </script>
+
+<%include ../partials/footer.ejs %>

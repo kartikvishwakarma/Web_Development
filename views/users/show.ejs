@@ -1,0 +1,28 @@
+<%include ../partials/header.ejs %>
+
+<div class="row">
+	<div class="col-md-4">
+		<h1><%= user.firstName + " " + user.lastName %></h1>
+		<div class="thumbnail">
+			<img src="<%= user.avatar %>" alt="user profile image">
+			<div class="caption"><a href="mailto: <%=user.email%>"><%=user.email%></a> </div>	
+		</div>
+		Bacon ipsum dolor amet chislic ham kevin pork tongue pastrami. Pastrami doner pork belly rump swine burgdoggen. Hamburger jerky buffalo t-bone andouille, turducken ball tip shankle bacon pork belly drumstick sirloin kielbasa pastrami landjaeger. 
+
+		Kevin prosciutto burgdoggen chislic alcatra ham hock. Doner chislic turkey, rump burgdoggen kevin corned beef cow filet mignon alcatra shank pork kielbasa tail.
+	</div>
+
+	<div class="col-md-8">
+		<h3> <%= user.username %>'s campgrounds </h3> 	
+		<ul>
+			<% campgrounds.forEach(function(campground) { %>
+			<li>
+				<a href="/campgrounds/<%= campground.id%>"> <%= campground.name %> </a>
+			</li>
+			<% }); %>
+		</ul>	
+	</div>
+	
+</div>
+
+<%include ../partials/footer.ejs %>
