@@ -20,7 +20,12 @@ var commentRoutes 	 = require("./routes/comments"),
 
 
 //mongoose.connect("mongodb://localhost/yelp_camp");
-mongoose.connect("mongodb://localhost/yelp_camp_v9",{ useNewUrlParser: true,  useUnifiedTopology: true});
+//mongoose.connect("mongodb://localhost/yelp_camp_v9",{ useNewUrlParser: true,  useUnifiedTopology: true});
+mongoose.connect(process.env.DB_ATLAS_URL,{ useNewUrlParser: true,  useUnifiedTopology: true}).then(() => {
+	console.log('connected to DB!');
+}).catch(err => {
+	console.log('ERROR: ', err.message);
+});
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
