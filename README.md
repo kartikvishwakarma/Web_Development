@@ -36,3 +36,6 @@ It Design to Upload Adventure images with description to a Registered User.
 
 ### Debugging using
 - Locus 
+
+### Preview 
+[ Campground Page](YelpCampShort.png)
