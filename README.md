@@ -3,7 +3,7 @@ Web Development Course A Responsive Web Application with Restful routing project
 It Design to Upload Adventure images with description to a Registered User.
 
 ### Visit Page
-![YelpCamp Demo](https://kartik-yelpcamp.herokuapp.com/campgrounds)
+[YelpCamp Demo](https://kartik-yelpcamp.herokuapp.com/campgrounds)
 
 ### Web Application has following functional features:
   - Login/Register
